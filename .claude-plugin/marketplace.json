@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "powerbi-forge",
+  "owner": {
+    "name": "sweeguan",
+    "email": "sweeguan@yahoo.com"
+  },
+  "metadata": {
+    "description": "Marketplace hosting Power BI Forge — a Claude Code plugin for building Power BI dashboards with pbi-cli and open-source data.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "powerbi-forge",
+      "source": "./plugins/powerbi-forge",
+      "description": "Build awesome Power BI dashboards from Claude Code. Wraps the pbi-cli tool to model a star schema, author DAX, and lay out report pages, and pushes you toward free open-source APIs and databases for the data.",
+      "keywords": ["power-bi", "dashboard", "dax", "analytics", "data-visualization", "pbi-cli"],
+      "category": "data"
+    }
+  ]
+}

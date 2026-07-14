@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "powerbi-forge",
+  "displayName": "Power BI Forge",
+  "version": "0.1.0",
+  "description": "Build awesome Power BI dashboards with Claude via pbi-cli — wire in open-source APIs and databases, model a star schema, author DAX, and lay out polished report pages.",
+  "author": {
+    "name": "sweeguan",
+    "email": "sweeguan@yahoo.com"
+  },
+  "homepage": "https://github.com/MinaSaad1/pbi-cli",
+  "repository": "https://github.com/MinaSaad1/pbi-cli",
+  "license": "MIT",
+  "keywords": [
+    "power-bi",
+    "powerbi",
+    "pbi",
+    "pbi-cli",
+    "dashboard",
+    "dax",
+    "tmdl",
+    "pbir",
+    "semantic-model",
+    "analytics",
+    "data-visualization",
+    "open-data"
+  ]
+}
