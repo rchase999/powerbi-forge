@@ -3,6 +3,16 @@
 All notable changes to Power BI Forge are documented here. This project follows
 [Semantic Versioning](https://semver.org).
 
+## [0.1.1] - 2026-07-15
+
+### Fixed
+- `powerbi-dashboard` skill now documents the PBIP semantic-model packaging
+  gotcha: `database export-tmdl` writes raw TMDL, but a standalone `.pbip`
+  requires the model folder to be a valid artifact (`.platform` +
+  `definition.pbism` at the root, TMDL under `definition/`). Without it Power BI
+  Desktop fails to open with `RequiredArtifactMissing: definition.pbism`. Added
+  the fix steps and a launch-and-check-for-FrownSnapShot verification step.
+
 ## [0.1.0] - 2026-07-14
 
 ### Added

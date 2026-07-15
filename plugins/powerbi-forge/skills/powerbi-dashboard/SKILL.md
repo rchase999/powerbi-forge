@@ -135,6 +135,32 @@ npx --yes powerbi-visuals-tools@^5.6.0 package
 pbi visual import-custom dist/my-visual.pbiviz --replace
 ```
 
+## Packaging a standalone `.pbip` (critical gotcha)
+
+`pbi report create --dataset-path` references the model folder as a **PBIP
+semantic-model artifact**, but `pbi database export-tmdl` writes only *raw* TMDL.
+Power BI Desktop then refuses to open the `.pbip` with
+`RequiredArtifactMissing: definition.pbism`. A valid semantic-model artifact needs:
+
+```
+MyModel.Dataset/            (or .SemanticModel)
+├── .platform               ← {"metadata":{"type":"SemanticModel","displayName":"MyModel"},
+│                              "config":{"version":"2.0","logicalId":"<guid>"}}
+├── definition.pbism        ← {"version":"4.2","settings":{}}
+└── definition/             ← ALL exported TMDL moves under here
+    ├── model.tmdl · database.tmdl · relationships.tmdl
+    ├── tables/*.tmdl
+    └── cultures/*.tmdl
+```
+
+After `export-tmdl`, create `definition/`, move every `.tmdl` (and the `tables/`
+and `cultures/` folders) into it, then add `.platform` and `definition.pbism` at
+the artifact root. Keep the folder name the same so the report's
+`definition.pbir` `byPath` (`../MyModel.Dataset`) still resolves. Verify the
+`.pbip` actually opens (launch it, confirm no `FrownSnapShot*.zip` appears in
+`%LOCALAPPDATA%\Microsoft\Power BI Desktop\`) before claiming done — do not rely
+on `report validate` alone, which only checks the report layer.
+
 ## Deliver
 
 When done, summarize for the user: which data source is wired, the model shape
