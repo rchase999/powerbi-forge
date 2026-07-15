@@ -69,6 +69,24 @@ Apply and reinforce with `pbi report set-background`, `pbi format
 background-gradient|background-conditional|background-measure`. Keep the same
 palette across pages. Reserve red strictly for "bad"; don't decorate with it.
 
+**Theme gotcha (verified):** `pbi report set-theme` embeds the theme as a PBIR
+`RegisteredResources` package, and some Power BI Desktop builds then refuse to
+open the report with **"Something went wrong — Failed to load the report."** The
+model still loads; only the report fails. If that happens:
+1. Confirm it's the theme: strip it (remove `themeCollection.customTheme`, the
+   `resourcePackages` entry, and the `StaticResources/` folder from the report) —
+   base themes always load. If the report then opens, the custom-theme wiring was
+   the cause.
+2. Re-apply the theme the way Desktop accepts: **import it through the UI**
+   (View ribbon → Themes → Browse for themes → pick your `*.json`). Desktop writes
+   the registered-resource wiring its own version accepts, so it renders reliably.
+   Alternatively bake colors per visual via `pbi format`, avoiding the report-level
+   theme entirely.
+
+Note `set-theme` may also write the registered path with a `BaseThemes/` prefix
+(valid only for built-in SharedResources, not custom themes) — another reason the
+hand-wired report can fail to load.
+
 ## Visual selection matrix — chart for the question
 
 | The question is about… | Use | Avoid |

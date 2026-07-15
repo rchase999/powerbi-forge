@@ -3,6 +3,17 @@
 All notable changes to Power BI Forge are documented here. This project follows
 [Semantic Versioning](https://semver.org).
 
+## [0.1.2] - 2026-07-15
+
+### Fixed
+- `dashboard-design` skill now documents the `pbi report set-theme` gotcha: the
+  embedded PBIR `RegisteredResources` custom theme can make Power BI Desktop fail
+  to open the report ("Something went wrong — Failed to load the report") while
+  the model still loads. Adds the isolate-by-stripping step and the reliable
+  re-apply path (import the theme through Desktop's View → Themes → Browse UI, or
+  bake colors per visual). Also notes the invalid `BaseThemes/` path prefix
+  `set-theme` may emit for custom themes.
+
 ## [0.1.1] - 2026-07-15
 
 ### Fixed
