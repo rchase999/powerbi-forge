@@ -3,6 +3,16 @@
 All notable changes to Power BI Forge are documented here. This project follows
 [Semantic Versioning](https://semver.org).
 
+## [0.2.0] - 2026-07-15
+
+### Added
+- `web-base-to-powerbi` skill: a design-base workflow — author an animated web
+  page as the visual spec, verify it in a real browser, then convert it
+  element-by-element into a native Power BI dashboard (semantic model + PBIR)
+  using Power BI's full capabilities. Includes the web-element → native-visual
+  mapping table and a "wow" capability checklist (bookmarks/navigation,
+  drill-through, field parameters, decomposition tree, key influencers, tooltips).
+
 ## [0.1.3] - 2026-07-15
 
 ### Fixed
