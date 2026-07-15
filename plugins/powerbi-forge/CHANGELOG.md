@@ -3,6 +3,18 @@
 All notable changes to Power BI Forge are documented here. This project follows
 [Semantic Versioning](https://semver.org).
 
+## [0.1.3] - 2026-07-15
+
+### Fixed
+- `pbi-cli-reference` skill: documented that `visual bind --field` on a slicer
+  column writes it as a `"Measure"` reference, causing Power BI's
+  "Missing_References" error; the fix is to change `"Measure"`→`"Column"` in the
+  slicer's `visual.json`. `--field` is correct for cards, wrong for slicer columns.
+- `dashboard-design` skill: added the root cause of the theme-load failure (PBIR
+  preview forbids externally added RegisteredResources, per Microsoft docs) and a
+  supported automated alternative — baking `dataPoint.defaultColor` into each
+  chart's `visual.json`.
+
 ## [0.1.2] - 2026-07-15
 
 ### Fixed

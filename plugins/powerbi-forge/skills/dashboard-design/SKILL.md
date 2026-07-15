@@ -87,6 +87,23 @@ Note `set-theme` may also write the registered path with a `BaseThemes/` prefix
 (valid only for built-in SharedResources, not custom themes) — another reason the
 hand-wired report can fail to load.
 
+**Why it fails (root cause):** per Microsoft's PBIR docs, "edits to
+RegisteredResources files are only supported for already-loaded resources that
+cause Power BI Desktop to register the resource in report.json." So during the
+PBIR preview you **cannot auto-embed a custom theme by editing files** — Desktop
+must register it. Two supported paths for the colors:
+1. **Full theme:** import via Desktop UI (View → Themes → Browse). One-time,
+   manual, gives backgrounds + fonts + data colors.
+2. **Automated data colors:** bake them into each chart's `visual.json`, which
+   *is* supported external editing. Add to the chart's `visual` object:
+   ```json
+   "objects": { "dataPoint": [ { "properties": { "defaultColor":
+     { "solid": { "color": { "expr": { "Literal": { "Value": "'#5FA83C'" } } } } } } } ] }
+   ```
+   (`defaultColor` recolors single-series bar/line/column; leave multi-slice
+   donut/pie on the default palette.) This can't break the load and needs no
+   Desktop registration. `pbi report validate` after, then reload.
+
 ## Visual selection matrix — chart for the question
 
 | The question is about… | Use | Avoid |

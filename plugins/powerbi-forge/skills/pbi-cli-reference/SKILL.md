@@ -126,3 +126,16 @@ pbi bookmarks list|get|add|delete|set-visibility
   instead of looping single edits when touching many visuals.
 - If a command errors, read the exact error text, run its `--help`, and adjust —
   do not retry the same call blindly.
+
+## Binding gotchas (verified)
+
+- **Slicer columns → `Missing_References`.** `pbi visual bind <slicer> --field
+  "Table[Column]"` writes the projection as a `"Measure"` reference, but a slicer
+  needs a **column**. Power BI then fails to render with "Underlying Error:
+  Missing_References". Fix: in the slicer's `visual.json`, change the projection's
+  `"Measure"` wrapper to `"Column"` (same `Expression`/`Property`). `--field` is
+  correct for *cards* (which show measures), wrong for slicers (which need columns).
+  After binding slicers, grep the visual JSON to confirm each column is under
+  `"Column"`, not `"Measure"`.
+- Chart `--category` writes columns correctly (as `"Column"`); only `--field` on a
+  column is the trap.
