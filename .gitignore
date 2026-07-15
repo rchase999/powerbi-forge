@@ -7,3 +7,7 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+
+# render/verify scratch
+.playwright-mcp/
+mc-base-*.png
